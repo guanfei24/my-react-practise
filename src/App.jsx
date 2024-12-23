@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import TodoList from "./compounents/todoList";
+import TodoList from "./compounents/TodoList";
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Todo from "./todo";
+import Todo from "./Todo";
 import NewTodo from "./NewTodo";
 
 export default function TodoList() {
