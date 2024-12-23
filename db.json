@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "title": "123476",
+      "completed": true,
+      "id": "c975"
+    },
+    {
+      "id": "7f54",
+      "title": "123",
+      "completed": false
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
