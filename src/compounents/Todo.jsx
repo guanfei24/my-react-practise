@@ -4,23 +4,63 @@ import { useDispatch } from "react-redux";
 export default function Todo({ todo }) {
   const { id, title, completed } = todo;
   const dispatch = useDispatch();
-  const deleteById = () => {
-    const res = dispatch({ type: "DELETE_TODO", payload: id });
+  const deleteById = async () => {
+    // delete API
+    fetch(`http://localhost:3000/todos/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        console.log("Deleted successfully");
+        dispatch({ type: "DELETE_TODO", payload: id });
+      } else {
+        console.log("Deleted Error", res);
+        return;
+      }
+    });
   };
+
   const completeById = () => {
-    dispatch({
-      type: "COMPLETE_TODO",
-      payload: { id: id, completed: !completed },
+    //complete API
+    //update complete
+    fetch(`http://localhost:3000/todos/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ completed: !completed }),
+    }).then((res) => {
+      if (res.ok) {
+        console.log("Update successfully");
+        //update state
+        dispatch({
+          type: "COMPLETE_TODO",
+          payload: { id: id, completed: !completed },
+        });
+      } else {
+        console.log("Update Error", res);
+        return;
+      }
     });
   };
   const [edit, setEdit] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
   const save = () => {
-    dispatch({
-      type: "EDIT_TODO",
-      payload: { id, title: newTitle, completed },
+    //update API
+    fetch(`http://localhost:3000/todos/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        title: newTitle,
+        completed: completed,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        console.log("Update successfully");
+        dispatch({
+          type: "EDIT_TODO",
+          payload: { id, title: newTitle, completed },
+        });
+        setEdit(false);
+      } else {
+        console.log("Error", res);
+      }
     });
-    setEdit(false);
   };
   return (
     <div>
