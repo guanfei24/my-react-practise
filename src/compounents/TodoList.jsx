@@ -4,7 +4,7 @@ import Todo from "./Todo";
 import NewTodo from "./NewTodo";
 
 export default function TodoList() {
-  const todos = useSelector((state) => state);
+  const todos = useSelector((state) => state.todos);
   return (
     <div>
       <h2>Todo List</h2>
